@@ -15,37 +15,22 @@
 	<BR/>
 
 	<label>Update Brand:</label>
-	<select id='selectbox'>
+	<select id='selectbox_brand'>
 	    <option value="0">~Please Select~</option>
-	    <option value="1">Halifax</option>
-	    <option value="2">Lloyds</option>
-	    <option value="3">Bank Of Scotland</option>
 	</select>
 	<BR/>
 
 	<label >Update Position:</label>
-	<select id='selectbox'>
+	<select id='selectbox_position' onchange="update_FormFactor()">
 	    <option value="0">~Please Select~</option>
-	    <option value="1">SingleBehindCounter</option>
-	    <option value="2">MultipleBehindCounter</option>
-	    <option value="3">WindowInterior</option>
-	    <option value="4">WindowExterior</option>
-	    <option value="3">CampaignWall</option>
 	</select>
 	<BR/>
 
 	<label>Update Form Factor:</label>
-	<select id='selectbox'>
+	<select id='selectbox_formfactor'>
 	    <option value="0">~Please Select~</option>
-	    <option value="1">1L</option>
-	    <option value="2">2L</option>
-	    <option value="3">3L</option>
-	    <option value="4">4L</option>
-	    <option value="5">6CW</option>
-	    <option value="6">P</option>
 	</select>
 	<BR/>
-
 
 	<button id = "submit_button" onclick="myFunction()">
 		Submit
