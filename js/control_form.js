@@ -41,62 +41,125 @@
         }
 	});
 
+	var data_brands = [];
+	var data_positions = [];
+	var xmlDoc = null;
+
 	$.ajax({
-	    url: "http://localhost:8000//LBG_tablet_config.csv",
+
+	    url: "http://localhost:8000//LBG_tablet_config.xml",
 	    async: false,
 	    success: function (csvd) {
-	        data2 = $.csv2Array(csvd);
+
+		if (window.DOMParser)
+  		{
+			parser=new DOMParser();
+			xmlDoc=parser.parseFromString(csvd,"text/xml");
+		}
+		else // Internet Explorer
+		{
+			xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+			xmlDoc.async=false;
+			xmlDoc.loadXML(csvd); 
+		}				
+		
+		xml_brands = xmlDoc.getElementsByTagName("brand");		
+		for (var i = 0, n = xml_brands.length; i < n; i++)
+		{
+			data_brands.push( xml_brands[i].getAttribute("name") );
+		}
+
+		xml_pos = Xpath("//brand[@name = 'Halifax']/position", xmlDoc);
+
+		var iteration = xml_pos.iterateNext();
+		while (iteration) {
+                    data_positions.push(iteration.getAttribute("name"));
+                    iteration = xml_pos.iterateNext();
+                }		
+
+		data_brands	= data_brands.sort()
+		data_positions	= data_positions.sort()
+
 	    },
  	    dataType: "text",
 	    complete: function () {
  	    // call a function on complete 
 	    
-	    headers = data2[0];
-
-	    data2 = data2.splice(1, data.length - 1);
-
-	    for (var row in data2)
-	    {		
-			if (data2[row][headers.indexOf('brand')] != '')
-			{
-				var option = document.createElement("option");
-				option.value = data2[row][headers.indexOf('brand')];
-				option.text  = data2[row][headers.indexOf('brand')];
-				var select = document.getElementById("selectbox_brand");
-				select.appendChild(option);
-			}	
+	    for (var row in data_brands)
+	    {					
+			var option = document.createElement("option");
+			option.value = data_brands[row];
+			option.text  = data_brands[row];
+			var select = document.getElementById("selectbox_brand");
+			select.appendChild(option);				
 	    }
 
-	    for (var pos in headers)
-	    {
-			if (pos >0)
-			{
-				var option = document.createElement("option");
-				option.value = headers[pos];
-				option.text  = headers[pos];
-				var select = document.getElementById("selectbox_position");
-				select.appendChild(option);
-			}
-	    }
+	    var select = document.getElementById("selectbox_player");
+	    xml_post = Xpath("//players/player", xmlDoc);
+
+	    var iteration = xml_post.iterateNext();
+	    while (iteration) {
+
+		    var option = document.createElement("option");
+		    option.value = iteration.getAttribute("id");
+		    option.text  = iteration.getAttribute("server") + ": " + iteration.getAttribute("name");		    
+		    select.appendChild(option);
+                    iteration = xml_post.iterateNext();
+            }
 
         }
 	});
+
+	function Xpath(path, xml)
+	{
+		return xml.evaluate(path, xml, null, 5, null);
+	}
+
+	function update_Position() {
+
+		removeOptions(document.getElementById("selectbox_position"));
+		removeOptions(document.getElementById("selectbox_formfactor"));   
+
+		xml_post = Xpath("//brand[@name = '"+ document.getElementById("selectbox_brand").value +"']/position", xmlDoc);
+
+		var iteration = xml_post.iterateNext();
+		while (iteration) {
+
+		    var option = document.createElement("option");
+		    option.value = iteration.getAttribute("name");
+		    option.text  = iteration.getAttribute("name");
+		    var select = document.getElementById("selectbox_position");
+		    select.appendChild(option);
+
+                    iteration = xml_post.iterateNext();
+                }
+
+	}
 
 	function update_FormFactor() {
 
 		removeOptions(document.getElementById("selectbox_formfactor"));    			
 
-	    	for (var row in data2)
-	    	{		
-			if (data2[row][headers.indexOf(document.getElementById("selectbox_position").value)] != '')
-			{
-				var option = document.createElement("option");
-				option.value = data2[row][headers.indexOf(document.getElementById("selectbox_position").value)];
-				option.text  = data2[row][headers.indexOf(document.getElementById("selectbox_position").value)];
-				var select = document.getElementById("selectbox_formfactor");
-				select.appendChild(option);
-			}	
-	    	}
+		xml_post = Xpath("//brand[@name = '"+ document.getElementById("selectbox_brand").value +"']/position[@name = '"+ document.getElementById("selectbox_position").value +"']/form", xmlDoc);
+
+		var iteration = xml_post.iterateNext();
+		while (iteration) {
+
+		    var option = document.createElement("option");
+		    option.value = iteration.getAttribute("name");
+		    option.text  = iteration.getAttribute("name");
+		    var select = document.getElementById("selectbox_formfactor");
+		    select.appendChild(option);
+
+                    iteration = xml_post.iterateNext();
+                }
+
+	}
+
+	function update_player() {
+		
+		document.getElementById("submit_button").disabled = false;
+
 	}
 
 	function removeOptions(selectbox)

@@ -8,6 +8,12 @@
 
 <body>
 	
+	<label>Select Player:</label>
+	<select id='selectbox_player'  onchange="update_player()">
+	    <option value="0">~Please Select~</option>
+	</select>
+	<BR/>
+	<BR/>
 	<label>Update Sort Code:</label>
 	<select id='selectbox'>
 	    <option value="0">~Please Select~</option>
@@ -15,7 +21,7 @@
 	<BR/>
 
 	<label>Update Brand:</label>
-	<select id='selectbox_brand'>
+	<select id='selectbox_brand'  onchange="update_Position()">
 	    <option value="0">~Please Select~</option>
 	</select>
 	<BR/>
@@ -32,7 +38,7 @@
 	</select>
 	<BR/>
 
-	<button id = "submit_button" onclick="myFunction()">
+	<button id = "submit_button" onclick="myFunction()" disabled =true>
 		Submit
 	</button>
 
