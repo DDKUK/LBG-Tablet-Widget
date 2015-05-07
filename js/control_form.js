@@ -1,7 +1,11 @@
+	$('.showresult').dialog({ autoOpen: false }); // Initialize dialog plugin
+
 	function myFunction() {
 			//Collect values ect and sumit them to scala here
-    			document.getElementById("submit_button").style.color = "red";
-							
+    			//document.getElementById("submit_button").style.color = "red";
+				document.getElementById("submit_button").disabled = true;	
+				
+				//DISABLE BUTTON			
 
 				var result = Xpath("//player[@id = '"+ document.getElementById("selectbox_player").value +"']", xmlDoc);
 				var iteration = result.iterateNext();
@@ -14,8 +18,89 @@
 				console.log(document.getElementById("combobox").value);
 				console.log(document.getElementById("selectbox_position").value);				
 				console.log(document.getElementById("selectbox_formfactor").value);
+						
+				//var data =  	  "{'command': 'connection_test','player_id'	  : '0','player_position' : '',";
+				//var data = data + "'player_formfactor: '','player_brand' 	  : '','player_sortcode' :''}";
+
+				var data = {
+								'command': 'connection_test',
+								'player_id': '0',
+								'player_position' : '',
+								'player_formfactor' : '',
+								'player_brand' : '',
+								'player_sortcode' : ''
+						   };
+				
+				PostJson(data);
+				
+
+			
 	}
 
+	function PostJson(data)
+	{		
+		try{
+				jQuery.ajax({
+				type: "POST",
+				url: 'http://localhost:9977',
+				data: JSON.stringify(data),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+					complete: function(datareply) {
+						//Trigger Success
+						check_connect("", datareply.responseText);
+					},
+					error : function(datareply) {
+						//Trigger Fail
+						check_connect("Unable to connect", datareply.responseText);
+					}
+				});
+		}catch(e){
+				check_connect("Unable to connect","");
+		}
+	}
+	
+	function check_connect(result, reply) {
+		// code that depends on reply from scala
+		if (result === "Unable to connect" && reply === "")
+		{
+			//DO SOMETHING ON FAIL
+			connection_failure()
+			
+		} else 
+		{
+			if (reply != "" && result != "Unable to connect")
+			{
+			//DO SOMETHING SUCCESS WTIH THE RESULT
+			connection_success(reply)					
+			}
+		}
+		
+		//Wait 5 seconds and re-enable the button
+		setTimeout(re_enable_button(),5000);
+	}
+	
+	function connection_failure()
+	{
+		//DISPLAY BUTTON TEXT AS RESULT
+		console.log("We were unable to contact the server");
+		document.getElementById('j_result').innerHTML = 'Failed To Contact Server';		
+		$('.showresult').dialog("open"); // Open popup
+	}
+	
+	function connection_success(reply)
+	{
+		//DISPLAY BUTTON TEXT AS RESULT
+		console.log("Server Replied with: " + reply);
+		document.getElementById('j_result').innerHTML = reply;		
+		$('.showresult').dialog("open"); // Open popup
+	}
+	
+	function re_enable_button()
+	{
+		//RE-ENABLE BUTTON
+		document.getElementById("submit_button").disabled = false;	
+	}
 	
 	function update_sorts(thisvalue) {
 	data = data.sort(compareBranchColumn); 

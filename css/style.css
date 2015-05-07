@@ -39,3 +39,9 @@ height: 38px;
 .ui-widget{
     text-align:center;
 }
+
+.showresult {
+  float: center;
+  position: absolute;
+  top: 100%;
+}
