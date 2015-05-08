@@ -1,5 +1,8 @@
 	$('.showresult').dialog({ autoOpen: false }); // Initialize dialog plugin
 
+	$("#submit_button").addClass("ui-input-box2 ui-corner-right ui-corner-left ui-button-icon custom-combobox ui-widget ui-widget-content ui-state-default");	   	   
+	//$("#submit_button").button({ icons: { primary: "ui-icon-triangle-1-s" },text: false});
+	
 	function myFunction() {
 			//Collect values ect and sumit them to scala here
     			//document.getElementById("submit_button").style.color = "red";
@@ -9,15 +12,15 @@
 
 				var result = Xpath("//player[@id = '"+ document.getElementById("selectbox_player").value +"']", xmlDoc);
 				var iteration = result.iterateNext();
-				console.log(iteration.getAttribute("sid"));
-				console.log(iteration.getAttribute("name"));
-				console.log(iteration.getAttribute("server"));
-				console.log(iteration.getAttribute("serverurl"));
+				//console.log(iteration.getAttribute("sid"));
+				//console.log(iteration.getAttribute("name"));
+				//console.log(iteration.getAttribute("server"));
+				//console.log(iteration.getAttribute("serverurl"));
 								
-				console.log(document.getElementById("selectbox_brand").value);
-				console.log(document.getElementById("combobox").value);
-				console.log(document.getElementById("selectbox_position").value);				
-				console.log(document.getElementById("selectbox_formfactor").value);
+				//console.log(document.getElementById("selectbox_brand").value);
+				//console.log(document.getElementById("combobox").value);
+				//console.log(document.getElementById("selectbox_position").value);				
+				//console.log(document.getElementById("selectbox_formfactor").value);
 						
 				//var data =  	  "{'command': 'connection_test','player_id'	  : '0','player_position' : '',";
 				//var data = data + "'player_formfactor: '','player_brand' 	  : '','player_sortcode' :''}";
@@ -31,8 +34,11 @@
 								'player_sortcode' : ''
 						   };
 				
+								
 				PostJson(data);
 				
+				
+	
 
 			
 	}

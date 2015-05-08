@@ -6,7 +6,6 @@ width: 30%;
 float: left;
 }
 
-
 select {
 font-weight: bold;
 display: block;
@@ -55,6 +54,11 @@ body {
     text-align:center;	
 	
 	
+}
+
+
+.submission{
+    text-align:center;		
 }
 
 .showresult {
