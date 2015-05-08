@@ -19,10 +19,25 @@ width: 50%;
 height: 38px;
 }
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+html {
+    display: table;
+}
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
 
 .custom-combobox {
     position: relative;
     display: inline-block;
+	
 }
 .custom-combobox-toggle {
     position: absolute;
@@ -37,7 +52,9 @@ height: 38px;
 }
 
 .ui-widget{
-    text-align:center;
+    text-align:center;	
+	
+	
 }
 
 .showresult {
