@@ -122,8 +122,8 @@
  
 	 $(document).ready(function() {
 
-		 
-	 
+
+
          $("#combobox" ).combobox({ });
 		 
          $("#toggle" ).click(function() {
@@ -135,6 +135,7 @@
 		 $("#selectbox_brand" ).combobox({		 });
 		 $("#selectbox_brand").change(function() {
 			 	
+			console.log(document.getElementById("selectbox_player").value);
 			 
 			removeOptions(document.getElementById("combobox"));
 			update_sorts(this.value);
@@ -148,10 +149,16 @@
 			$("#selectbox_combobox option:selected").val(0)
 			$("#selectbox_position option:selected").val(0)
 			$("#selectbox_formfactor option:selected").val(0)
-				 				 
+											
             update_Position();
+
+			var val = document.getElementById("selectbox_brand").value;
 			
 			$("#olay_combobox").focus(); 
+			
+			document.getElementById("selectbox_brand").value = val;
+			
+			
 			jsKeyboard.currentElement = $("#olay_combobox");
 			jsKeyboard.currentElementCursorPosition = $("#olay_combobox").getCursorPosition();
          });
@@ -164,7 +171,13 @@
 			$("#selectbox_formfactor option:selected").val(0)
 		 
 			
+			
+			var val = document.getElementById("selectbox_position").value;
+
 			$("#olay_selectbox_formfactor").focus(); 
+			
+			document.getElementById("selectbox_position").value = val;
+			
 			jsKeyboard.currentElement = $("#olay_selectbox_formfactor");
 			jsKeyboard.currentElementCursorPosition = $("#olay_selectbox_formfactor").getCursorPosition();
 			
@@ -175,7 +188,12 @@
 		 
 		 $("#selectbox_formfactor" ).change(function() {	
 		 
+		 	 var val = document.getElementById("selectbox_formfactor").value;
+		 
 		 	 $("#olay_selectbox_formfactor").blur(); 
+			 
+			 document.getElementById("selectbox_formfactor").value = val;
+			 
 			 jsKeyboard.currentElement = $("#selectbox_player");
 			 jsKeyboard.currentElementCursorPosition = 0;
 		 });		 
@@ -183,10 +201,6 @@
 		 $("#selectbox_player" ).combobox({ });
 		 				
 		 $("#selectbox_player").change(function() {			
-
-			//console.log($("#selectbox_player option:selected").val());
-			//console.log($("#selectbox_player option:selected").val());
-			//console.log($("#selectbox_player option:selected").text());
 
 			//Reset Controls to default
 			$("#olay_combobox").val("");
@@ -198,17 +212,28 @@
 			$("#combobox option:selected").val(0)
 			$("#selectbox_brand option:selected").val(0)
 			$("#selectbox_position option:selected").val(0)
-			$("#selectbox_formfactor option:selected").val(0)	
+			$("#selectbox_formfactor option:selected").val(0)						
 									
             update_player();
-			$("#olay_selectbox_brand").focus(); 
+			
+			var val = document.getElementById("selectbox_player").value;
+	
+			document.getElementById("olay_selectbox_brand").focus();
+
+			document.getElementById("selectbox_player").value = val;
 			
 			jsKeyboard.currentElement = $("#olay_selectbox_brand");
-			jsKeyboard.currentElementCursorPosition = $("#olay_selectbox_brand").getCursorPosition();
-			
+			jsKeyboard.currentElementCursorPosition = $("#olay_selectbox_brand").getCursorPosition();						
+	
          });		 	 
          $("#combobox").change(function() {
+			 
+			 var val = document.getElementById("combobox").value;
+			 
 			 $("#olay_selectbox_position").focus(); 
+			 
+			 document.getElementById("combobox").value = val;
+			 
 			 jsKeyboard.currentElement = $("#olay_selectbox_position");
 			 jsKeyboard.currentElementCursorPosition = $("#olay_selectbox_position").getCursorPosition();
 		 });

@@ -13,10 +13,34 @@ width: 50%;
 }
 
 button {
-font-weight: bold;
+
 width: 50%;
 height: 38px;
 }
+
+buttonsubmit{
+
+	background-image: url("images/ui-icons_888888_256x240.png");
+	border: 1px solid #d3d3d3;
+	background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
+	font-weight: bold;
+	color: #555555;
+	
+}
+
+buttonsubmit:disabled{
+
+	background-image: url("images/ui-icons_888888_256x240.png");
+	border: 1px solid #d3d3d3;
+	background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
+	font-weight: 9;
+	color: #555555;
+	
+}
+
+
+
+
 
 html,
 body {
@@ -29,6 +53,16 @@ html {
 body {
     display: table-cell;
     vertical-align: middle;
+}
+
+.dialogbutton{
+	width: 20%;
+}
+
+
+
+.result-group{
+	position: relative;
 }
 
 .ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
@@ -56,6 +90,11 @@ body {
 	
 }
 
+.noTitleStuff .ui-dialog-titlebar {
+	display:none;
+	vertical-align: middle;
+	
+	}
 
 .submission{
     text-align:center;		
@@ -63,6 +102,7 @@ body {
 
 .showresult {
   float: center;
+  vertical-align: middle;
   position: absolute;
-  top: 100%;
+  top: 100%;  
 }

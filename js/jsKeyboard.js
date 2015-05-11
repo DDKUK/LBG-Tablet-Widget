@@ -24,7 +24,7 @@ var jsKeyboard = {
          {
             jsKeyboard.currentElement = $(this);
             jsKeyboard.currentElementCursorPosition = $(this).getCursorPosition();
-            console.log('keyboard is now focused on '+jsKeyboard.currentElement.attr('id')+' at pos('+jsKeyboard.currentElementCursorPosition+')');
+            //console.log('keyboard is now focused on '+jsKeyboard.currentElement.attr('id')+' at pos('+jsKeyboard.currentElementCursorPosition+')');
          });
     },
     focus: function(t) {

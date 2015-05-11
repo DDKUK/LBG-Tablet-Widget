@@ -1,10 +1,19 @@
-	$('.showresult').dialog({ autoOpen: false }); // Initialize dialog plugin
+	$('.showresult').dialog({
+			autoOpen: false ,
+			width: '50%',
+			dialogClass: 'noTitleStuff' 
+	}); // Initialize dialog plugin
 
-	$("#submit_button").addClass("ui-input-box2 ui-corner-right ui-corner-left ui-button-icon custom-combobox ui-widget ui-widget-content ui-state-default");	   	   
-	//$("#submit_button").button({ icons: { primary: "ui-icon-triangle-1-s" },text: false});
+	$("#submit_button").addClass("ui-input-box2 ui-corner-right ui-corner-left ui-button-icon custom-combobox ui-widget ui-state-default");	 
 	
-	function myFunction() {
-			//Collect values ect and sumit them to scala here
+	
+	function closeDialog(){
+		$('.showresult').dialog("close");
+	}
+	
+	function myFunction(event) {
+				
+				//Collect values ect and sumit them to scala here
     			//document.getElementById("submit_button").style.color = "red";
 				document.getElementById("submit_button").disabled = true;	
 				
@@ -34,33 +43,41 @@
 								'player_sortcode' : ''
 						   };
 				
-								
-				PostJson(data);
-				
-				
-	
-
-			
+				document.getElementById("button_retry").style.display='none';
+				document.getElementById('button_retry').style.visibility = 'hidden';
+				document.getElementById('button_ok').style.visibility = 'hidden';
+				document.getElementById('button_close').style.visibility = 'hidden';
+				document.getElementById('j_result').innerHTML = '<BR/>' + 'Attempting To Connect..';	
+				$('.showresult').dialog("open"); // Open popup
+					
+				PostJson(data,event);
+		
 	}
 
-	function PostJson(data)
+	function PostJson(data,event)
 	{		
-		try{
+		var strdata = JSON.stringify(data);
+		try{				
 				jQuery.ajax({
 				type: "POST",
 				url: 'http://localhost:9977',
-				data: JSON.stringify(data),
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
+				data: strdata,
+				
+				dataType: "text",
 					complete: function(datareply) {
 						//Trigger Success
+						//console.log("ajax success" + strdata);
 						check_connect("", datareply.responseText);
+
 					},
 					error : function(datareply) {
 						//Trigger Fail
+						//console.log("ajax fail" + strdata);
 						check_connect("Unable to connect", datareply.responseText);
+
 					}
 				});
+				
 		}catch(e){
 				check_connect("Unable to connect","");
 		}
@@ -90,15 +107,24 @@
 	{
 		//DISPLAY BUTTON TEXT AS RESULT
 		console.log("We were unable to contact the server");
-		document.getElementById('j_result').innerHTML = 'Failed To Contact Server';		
-		$('.showresult').dialog("open"); // Open popup
+		
+		document.getElementById("button_retry").style.display='inline';
+		document.getElementById('button_retry').style.visibility = 'visible';
+		document.getElementById('button_ok').style.visibility = 'visible';
+		document.getElementById('button_close').style.visibility = 'visible';
+		document.getElementById('j_result').innerHTML = '<BR/>' + 'Failed To Contact Server';		
+		
 	}
 	
 	function connection_success(reply)
 	{
 		//DISPLAY BUTTON TEXT AS RESULT
-		console.log("Server Replied with: " + reply);
-		document.getElementById('j_result').innerHTML = reply;		
+		console.log("Server Replied with: " + reply);				
+		document.getElementById("button_retry").style.display='none';
+		document.getElementById('button_retry').style.visibility = 'hidden';
+		document.getElementById('button_ok').style.visibility = 'visible';
+		document.getElementById('button_close').style.visibility = 'visible';
+		document.getElementById('j_result').innerHTML = '<BR/>' +reply;		
 		$('.showresult').dialog("open"); // Open popup
 	}
 	
@@ -140,30 +166,6 @@
 	}
 	}
 	    
-	function update_brands() {	
-	
-		removeOptions(document.getElementById("selectbox_brand"));
-		xml_brands = Xpath("//brands/brand", xmlDoc);
-	
-		pos_allowed = CheckAllowed("//player[@id = '"+ document.getElementById("selectbox_player").value +"']/allowed_brands/brand")
-		
-		var select = document.getElementById("selectbox_brand");
-		var iteration = xml_brands.iterateNext();
-		while (iteration) {
-
-			if(pos_allowed.indexOf(iteration.getAttribute("name")) > -1)
-			{
-		    var option = document.createElement("option");
-		    option.value = iteration.getAttribute("name");
-		    option.text  = iteration.getAttribute("name");		    
-		    select.appendChild(option);
-            
-			}
-			iteration = xml_brands.iterateNext();
-			
-		}
-		
-	}
 		
 	update_sorts();
 	
@@ -185,6 +187,11 @@
 		removeOptions(document.getElementById("selectbox_position"));
 		removeOptions(document.getElementById("selectbox_formfactor"));   
 
+		//console.log("updating position");
+		
+		//console.log(document.getElementById("selectbox_brand").value);
+		//console.log(document.getElementById("selectbox_player").value);
+		
 		xml_post = Xpath("//brand[@name = '"+ document.getElementById("selectbox_brand").value +"']/position", xmlDoc);
 
 		pos_allowed = CheckAllowed("//player[@id = '"+ document.getElementById("selectbox_player").value +"']/allowed_positions/position")
@@ -245,14 +252,38 @@
 
 	function update_player() {
 				
-		update_brands();
+		removeOptions(document.getElementById("selectbox_brand"));
+		xml_brands = Xpath("//brands/brand", xmlDoc);
+				
+		pos_allowed = CheckAllowed("//player[@id = '"+ document.getElementById("selectbox_player").value +"']/allowed_brands/brand")
+		
+		var select = document.getElementById("selectbox_brand");
+		var iteration = xml_brands.iterateNext();
+		while (iteration) {
+
+			if(pos_allowed.indexOf(iteration.getAttribute("name")) > -1)
+			{
+				
+			//console.log(iteration.getAttribute("name"));
+				
+		    var option = document.createElement("option");
+		    option.value = iteration.getAttribute("name");
+		    option.text  = iteration.getAttribute("name");		    
+		    select.appendChild(option);
+            
+			}
+			iteration = xml_brands.iterateNext();
+			
+		}
+		
+		
 		if (document.getElementById("selectbox_player").value > 0)
 		{
-			document.getElementById("submit_button").disabled = false;				
+			document.getElementById("submit_button").disabled = false;							
 		} else 
 		{
-			document.getElementById("submit_button").disabled = true;				
-		}
+			document.getElementById("submit_button").disabled = true;						
+		}		
 
 	}	
 

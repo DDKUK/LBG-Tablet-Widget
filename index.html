@@ -28,7 +28,7 @@
 
 
 	<label>Select Player:</label>
-	<select id='selectbox_player' onchange="update_player()">
+	<select id='selectbox_player' >
 	    <option value="0"></option>
 	</select>
 
@@ -37,7 +37,7 @@
 	<BR/>
 	
 	<label>Update Brand:</label>
-	<select id='selectbox_brand'  onchange="update_Position()">
+	<select id='selectbox_brand'  >
 	    <option value="0"></option>
 	</select>
 	<BR/>
@@ -53,7 +53,7 @@
 
 
 	<label >Update Position:</label>
-	<select id='selectbox_position' onchange="update_FormFactor()">
+	<select id='selectbox_position' >
 	    <option value="0"></option>
 	</select>
 	<BR/>
@@ -69,21 +69,26 @@
 	<BR/>
 	<BR/>
 	
-		<button id = "submit_button" onclick="myFunction()" disabled =true>
-			Submit
-		</button>
+
 	
 	</div>
+	
 	
 	<div class="submission">
-
-
 	
+		<button id = "submit_button" onclick="myFunction(event)" disabled =true>
+			Submit
+		</button>
+		
 	</div>
 	
-	<div class="result-group" style="position: relative;">
+	<div class="result-group">
 		<div class="showresult">
 			<p id="j_result"></p>
+			<BR/>
+			<button id="button_retry" class="dialogbutton" onclick="myFunction()">Retry</button>
+			<button id="button_ok" class="dialogbutton" onclick="parent.location='index.html'">Restart</button>		
+			<button id="button_close" class="dialogbutton" onclick="closeDialog()">Close</button>				
 		</div>
 	</div>
 	
