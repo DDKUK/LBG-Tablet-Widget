@@ -49,8 +49,10 @@
 				
 				document.getElementById("button_retry").style.display='none';
 				document.getElementById('button_retry').style.visibility = 'hidden';
-				document.getElementById('button_ok').style.visibility = 'hidden';
-				document.getElementById('button_close').style.visibility = 'hidden';
+				//document.getElementById('button_ok').style.visibility = 'hidden';
+				document.getElementById("button_close").style.display='none';
+				document.getElementById('button_close').style.visibility = 'hidden';				
+				document.getElementById('button_ok').style.visibility = 'visible';
 				document.getElementById('j_result').innerHTML = '<BR/>' + 'Attempting To Connect..';	
 				$('.showresult').dialog("open"); // Open popup
 					
@@ -115,6 +117,7 @@
 		document.getElementById("button_retry").style.display='inline';
 		document.getElementById('button_retry').style.visibility = 'visible';
 		document.getElementById('button_ok').style.visibility = 'visible';
+		document.getElementById('button_close').style.display='inline';
 		document.getElementById('button_close').style.visibility = 'visible';
 		document.getElementById('j_result').innerHTML = '<BR/>' + 'Failed To Contact Server';		
 		
@@ -127,6 +130,7 @@
 		document.getElementById("button_retry").style.display='none';
 		document.getElementById('button_retry').style.visibility = 'hidden';
 		document.getElementById('button_ok').style.visibility = 'visible';
+		document.getElementById('button_close').style.display='inline';
 		document.getElementById('button_close').style.visibility = 'visible';
 		document.getElementById('j_result').innerHTML = '<BR/>' +reply;		
 		$('.showresult').dialog("open"); // Open popup
