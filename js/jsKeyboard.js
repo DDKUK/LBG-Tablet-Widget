@@ -144,12 +144,15 @@ var jsKeyboard = {
 		};		
     },
     del: function() {
+		if (jsKeyboard.currentElementCursorPosition != 0)
+		{
         var a = jsKeyboard.currentElement.val(),
             pos = jsKeyboard.currentElementCursorPosition,
             output = [a.slice(0, pos-1), a.slice(pos)].join('');
         jsKeyboard.currentElement.val(output);
         jsKeyboard.currentElementCursorPosition--; //-1 cursor
         jsKeyboard.updateCursor();
+		}
     },
     enter: function() {
         var t = jsKeyboard.currentElement.val();

@@ -135,10 +135,10 @@
 		 $("#selectbox_brand" ).combobox({		 });
 		 $("#selectbox_brand").change(function() {
 			 	
-			console.log(document.getElementById("selectbox_player").value);
+			//console.log(document.getElementById("selectbox_player").value);
 			 
 			removeOptions(document.getElementById("combobox"));
-			update_sorts(this.value);
+			update_sorts();
 			
 			//Reset Controls to default
 			$("#olay_combobox").val("");
@@ -157,8 +157,7 @@
 			$("#olay_combobox").focus(); 
 			
 			document.getElementById("selectbox_brand").value = val;
-			
-			
+						
 			jsKeyboard.currentElement = $("#olay_combobox");
 			jsKeyboard.currentElementCursorPosition = $("#olay_combobox").getCursorPosition();
          });

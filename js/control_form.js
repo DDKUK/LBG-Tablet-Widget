@@ -21,7 +21,8 @@
 
 				var result = Xpath("//player[@id = '"+ document.getElementById("selectbox_player").value +"']", xmlDoc);
 				var iteration = result.iterateNext();
-				//console.log(iteration.getAttribute("sid"));
+
+				
 				//console.log(iteration.getAttribute("name"));
 				//console.log(iteration.getAttribute("server"));
 				//console.log(iteration.getAttribute("serverurl"));
@@ -30,17 +31,20 @@
 				//console.log(document.getElementById("combobox").value);
 				//console.log(document.getElementById("selectbox_position").value);				
 				//console.log(document.getElementById("selectbox_formfactor").value);
-						
+				
+				console.log("Requesting change on " + iteration.getAttribute("server") +" for player "+ iteration.getAttribute("sid") + " Changing " + document.getElementById("selectbox_brand").value + " " + document.getElementById("combobox").value + " " + document.getElementById("selectbox_position").value + " " + document.getElementById("selectbox_formfactor").value);
+				
 				//var data =  	  "{'command': 'connection_test','player_id'	  : '0','player_position' : '',";
 				//var data = data + "'player_formfactor: '','player_brand' 	  : '','player_sortcode' :''}";
 
 				var data = {
-								'command': 'connection_test',
-								'player_id': '0',
-								'player_position' : '',
-								'player_formfactor' : '',
-								'player_brand' : '',
-								'player_sortcode' : ''
+								'command': 'update_tablet_config',
+								'player_id': iteration.getAttribute("sid"),
+								'player_position' : document.getElementById("selectbox_position").value,
+								'player_formfactor' : document.getElementById("selectbox_formfactor").value,
+								'player_brand' : document.getElementById("selectbox_brand").value,
+								'player_sortcode' : document.getElementById("combobox").value,
+								'server_url' : iteration.getAttribute("server")
 						   };
 				
 				document.getElementById("button_retry").style.display='none';
@@ -134,27 +138,64 @@
 		document.getElementById("submit_button").disabled = false;	
 	}
 	
-	function update_sorts(thisvalue) {
-	data = data.sort(compareBranchColumn); 
+	function update_sorts() {
+		data = data.sort(compareBranchColumn); 
 
-	for (var row in data)
-	{
-		if (
-			(thisvalue === "Lloyds" && (data[row][headers.indexOf('Branch_Sort_Code')].match("^30") || (data[row][headers.indexOf('Branch_Sort_Code')].match("^70") ))) ||
-			(thisvalue === "Halifax" && (data[row][headers.indexOf('Branch_Sort_Code')].match("^11"))) || 
-			(thisvalue === "Bank Of Scotland" && (data[row][headers.indexOf('Branch_Sort_Code')].match("^80"))) 
-		   )
-		{
-		  if (row >0){
-			var option = document.createElement("option");
-			option.value = data[row][headers.indexOf('Branch_Sort_Code')];
-			option.text  = data[row][headers.indexOf('Branch_Address')];
-			var select = document.getElementById("combobox");
-			select.appendChild(option);
-		  }
-		}
+
+		//console.log($("#selectbox_brand").val());
 		
-	}
+		xml_post = Xpath("//brands/brand[@name='"+  $("#selectbox_brand").val() +"']", xmlDoc);
+		
+		
+		var matchids = "";
+		var iteration = xml_post.iterateNext();
+		while (iteration) {
+			//console.log("my iteration "+  iteration.getAttribute("filterids"));
+			matchids  = iteration.getAttribute("filterids");
+			//console.log("this iter " + matchids);
+			iteration = xml_post.iterateNext();
+		}	
+	
+		if (matchids != null)
+			
+		{
+	
+			//console.log("Mached List is " + matchids);
+			var matchid_ar = matchids.split(',');
+			
+			for (ma in matchid_ar)
+			{
+				 matchid_ar[ma] = matchid_ar[ma].trim();
+			}
+			
+			//console.log(matchid_ar);
+			
+			if (matchid_ar != "")
+			{
+				for (var row in data)
+				{
+					
+					//console.log( data[row][headers.indexOf('Branch_Sort_Code')].substring(0, 2) );				
+					//console.log($.inArray( data[row][headers.indexOf('Branch_Sort_Code')].substring(0, 2) , matchid_ar));
+					
+					if(
+						   $.inArray( data[row][headers.indexOf('Branch_Sort_Code')].substring(0, 2) , matchid_ar) > -1					  
+					  )
+					  {					  
+							  if (row >0){
+								//console.log(data[row][headers.indexOf('Branch_Sort_Code')] + " is in the array");
+								var option = document.createElement("option");
+								option.value = data[row][headers.indexOf('Branch_Sort_Code')];
+								option.text  = data[row][headers.indexOf('Branch_Address')];
+								var select = document.getElementById("combobox");
+								select.appendChild(option);
+							  };
+					  };
+				
+				};
+			};
+		
+		};
 
 	    function compareBranchColumn(a, b) {
     		if (a[headers.indexOf('Branch_Address')] === b[headers.indexOf('Branch_Address')]) {
@@ -167,7 +208,7 @@
 	}
 	    
 		
-	update_sorts();
+	//update_sorts();
 	
 	var select = document.getElementById("selectbox_player");
 	xml_post = Xpath("//players/player", xmlDoc);
