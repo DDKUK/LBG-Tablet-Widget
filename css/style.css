@@ -104,6 +104,9 @@ body {
   top: 100%;  
 }
 
+.hidekeys{
+  visibility: hidden;
+}
 
 /* LESS */
 

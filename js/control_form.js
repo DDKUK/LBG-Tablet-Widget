@@ -13,51 +13,66 @@
 	
 	function myFunction(event) {
 				
-				//Collect values ect and sumit them to scala here
-    			//document.getElementById("submit_button").style.color = "red";
-				document.getElementById("submit_button").disabled = true;	
-				
-				//DISABLE BUTTON			
-
-				var result = Xpath("//player[@id = '"+ document.getElementById("selectbox_player").value +"']", xmlDoc);
-				var iteration = result.iterateNext();
-
-				
-				//console.log(iteration.getAttribute("name"));
-				//console.log(iteration.getAttribute("server"));
-				//console.log(iteration.getAttribute("serverurl"));
+				if(document.getElementById("selectbox_formfactor").value === "0" && document.getElementById("selectbox_position").value != "0")
+				{
+					//Don't allow user to select a position without a formfactor
+					document.getElementById("button_retry").style.display='none';
+					document.getElementById('button_retry').style.visibility = 'hidden';
+					document.getElementById("button_close").style.display='inline';
+					document.getElementById('button_close').style.visibility = 'visible';				
+					document.getElementById('button_ok').style.display='none';
+					document.getElementById('button_ok').style.visibility = 'hidden';
+					document.getElementById('j_result').innerHTML = '<BR/>' + 'Please Select A Form Factor';	
+					$('.showresult').dialog("open"); // Open popup	
 								
-				//console.log(document.getElementById("selectbox_brand").value);
-				//console.log(document.getElementById("combobox").value);
-				//console.log(document.getElementById("selectbox_position").value);				
-				//console.log(document.getElementById("selectbox_formfactor").value);
-				
-				console.log("Requesting change on " + iteration.getAttribute("server") +" for player "+ iteration.getAttribute("sid") + " Changing " + document.getElementById("selectbox_brand").value + " " + document.getElementById("combobox").value + " " + document.getElementById("selectbox_position").value + " " + document.getElementById("selectbox_formfactor").value);
-				
-				//var data =  	  "{'command': 'connection_test','player_id'	  : '0','player_position' : '',";
-				//var data = data + "'player_formfactor: '','player_brand' 	  : '','player_sortcode' :''}";
-
-				var data = {
-								'command': 'update_tablet_config',
-								'player_id': iteration.getAttribute("sid"),
-								'player_position' : document.getElementById("selectbox_position").value,
-								'player_formfactor' : document.getElementById("selectbox_formfactor").value,
-								'player_brand' : document.getElementById("selectbox_brand").value,
-								'player_sortcode' : document.getElementById("combobox").value,
-								'server_url' : iteration.getAttribute("server")
-						   };
-				
-				document.getElementById("button_retry").style.display='none';
-				document.getElementById('button_retry').style.visibility = 'hidden';
-				//document.getElementById('button_ok').style.visibility = 'hidden';
-				document.getElementById("button_close").style.display='none';
-				document.getElementById('button_close').style.visibility = 'hidden';				
-				document.getElementById('button_ok').style.visibility = 'visible';
-				document.getElementById('j_result').innerHTML = '<BR/>' + 'Attempting To Connect..';	
-				$('.showresult').dialog("open"); // Open popup
+				} else 
+				{
+					//Collect values ect and sumit them to scala here
+					//document.getElementById("submit_button").style.color = "red";
+					document.getElementById("submit_button").disabled = true;	
 					
-				PostJson(data,event);
-		
+					//DISABLE BUTTON			
+
+					var result = Xpath("//player[@id = '"+ document.getElementById("selectbox_player").value +"']", xmlDoc);
+					var iteration = result.iterateNext();
+
+					
+					//console.log(iteration.getAttribute("name"));
+					//console.log(iteration.getAttribute("server"));
+					//console.log(iteration.getAttribute("serverurl"));
+									
+					//console.log(document.getElementById("selectbox_brand").value);
+					//console.log(document.getElementById("combobox").value);
+					//console.log(document.getElementById("selectbox_position").value);				
+					//console.log(document.getElementById("selectbox_formfactor").value);
+					
+					console.log("Requesting change on " + iteration.getAttribute("server") +" for player "+ iteration.getAttribute("sid") + " Changing " + document.getElementById("selectbox_brand").value + " " + document.getElementById("combobox").value + " " + document.getElementById("selectbox_position").value + " " + document.getElementById("selectbox_formfactor").value);
+					
+					//var data =  	  "{'command': 'connection_test','player_id'	  : '0','player_position' : '',";
+					//var data = data + "'player_formfactor: '','player_brand' 	  : '','player_sortcode' :''}";
+
+					var data = {
+									'command': 'update_tablet_config',
+									'player_id': iteration.getAttribute("sid"),
+									'player_position' : document.getElementById("selectbox_position").value,
+									'player_formfactor' : document.getElementById("selectbox_formfactor").value,
+									'player_brand' : document.getElementById("selectbox_brand").value,
+									'player_sortcode' : document.getElementById("combobox").value,
+									'server_url' : iteration.getAttribute("server")
+							   };
+					
+					document.getElementById("button_retry").style.display='none';
+					document.getElementById('button_retry').style.visibility = 'hidden';
+					//document.getElementById('button_ok').style.visibility = 'hidden';
+					document.getElementById("button_close").style.display='none';
+					document.getElementById('button_close').style.visibility = 'hidden';	
+					document.getElementById('button_ok').style.display='inline';					
+					document.getElementById('button_ok').style.visibility = 'visible';
+					document.getElementById('j_result').innerHTML = '<BR/>' + 'Attempting To Connect..';	
+					$('.showresult').dialog("open"); // Open popup
+						
+					PostJson(data,event);
+				}
 	}
 
 	function PostJson(data,event)
@@ -116,6 +131,7 @@
 		
 		document.getElementById("button_retry").style.display='inline';
 		document.getElementById('button_retry').style.visibility = 'visible';
+		document.getElementById('button_ok').style.display='inline';		
 		document.getElementById('button_ok').style.visibility = 'visible';
 		document.getElementById('button_close').style.display='inline';
 		document.getElementById('button_close').style.visibility = 'visible';
@@ -129,6 +145,7 @@
 		console.log("Server Replied with: " + reply);				
 		document.getElementById("button_retry").style.display='none';
 		document.getElementById('button_retry').style.visibility = 'hidden';
+		document.getElementById('button_ok').style.display='inline';		
 		document.getElementById('button_ok').style.visibility = 'visible';
 		document.getElementById('button_close').style.display='inline';
 		document.getElementById('button_close').style.visibility = 'visible';
