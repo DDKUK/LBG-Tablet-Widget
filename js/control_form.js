@@ -207,7 +207,7 @@
 								//console.log(data[row][headers.indexOf('Branch_Sort_Code')] + " is in the array");
 								var option = document.createElement("option");
 								option.value = data[row][headers.indexOf('Branch_Sort_Code')];
-								option.text  = data[row][headers.indexOf('Branch_Address')];
+								option.text  = data[row][headers.indexOf('Branch_Address')] + "(" + data[row][headers.indexOf('Branch_Sort_Code')] + ")";
 								var select = document.getElementById("combobox");
 								select.appendChild(option);
 							  };
