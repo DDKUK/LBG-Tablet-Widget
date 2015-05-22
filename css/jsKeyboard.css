@@ -16,7 +16,7 @@ overflow:hidden;
     padding:10px;
     width:810px;
     margin: 0 auto;
-    height:288;
+    height:270;
     display:block;
     padding-left:25px;
     display:block;
@@ -33,6 +33,22 @@ overflow:hidden;
 #keyboardSmallLetter {display:block;}
 #keyboardNumber {display:none;}
 #keyboardSymbols {display:none;}
+
+.pixelText{
+	height: 60px !important;
+	-webkit-user-select: auto !important;
+}
+
+.pixelButton{
+	height: 58px !important;
+	margin-top:-8px;
+}
+
+.pixelText:focus{
+	outline:none !important;
+    border-color:red !important;
+    box-shadow:0 0 10px blue !important;
+}
 
 .button
 {

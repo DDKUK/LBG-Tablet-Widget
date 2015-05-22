@@ -119,9 +119,23 @@ var jsKeyboard = {
     {
         //input cursor focus and position during typing		
 			
+		//console.log(jsKeyboard.currentElement.attr('id'));
 		
+		//$('#' + jsKeyboard.currentElement.attr('id')).trigger("select");		
+			
+		//$('#selectbox_player').trigger("select");
 		
-		$('#' + jsKeyboard.currentElement.attr('id')).trigger("input");		
+		//console.log (document.getElementById(jsKeyboard.currentElement.attr('id')).value);
+		
+		try {
+			
+		$('#' + jsKeyboard.currentElement.attr('id')).autocomplete('search', document.getElementById(jsKeyboard.currentElement.attr('id')).value);
+		
+		}
+		catch(err) {
+    
+		}
+			
 			
 		//console.log($("#olay_selectbox_player").val());
 		//console.log($("#olay_selectbox_player").val().length);		

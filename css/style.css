@@ -1,9 +1,10 @@
 label {
 color: #B4886B;
 font-weight: bold;
-display: block;
+font-size:20;
 width: 30%;
 float: left;
+line-height: 50px;
 }
 
 select {
@@ -16,6 +17,8 @@ button {
 
 width: 50%;
 height: 38px;
+height: 50px;
+
 }
 
 buttonsubmit{
@@ -25,6 +28,7 @@ buttonsubmit{
 	background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
 	font-weight: bold;
 	color: #555555;
+	height: 50px;
 	
 }
 
@@ -51,6 +55,12 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
+
+
+.inputwide{
+	width: 50%;
+}
+
 
 .dialogbutton{
 	width: 20%;

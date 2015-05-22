@@ -616,12 +616,16 @@ button.ui-button::-moz-focus-inner {
 
 
 .ui-input-box {
-	height: 38px;
-	width : 50%;
+	height: 50px;
+	width : 640px;
 }
 .ui-input-box2 {
-	margin: 0 0 0px 0;
-	
+	margin: 0 0 0px 0;	
+}
+
+.ui-input-button {
+
+	width : 45px;
 }
 
 
@@ -1235,3 +1239,4 @@ body .ui-tooltip {
 	filter: Alpha(Opacity=30); /* support: IE8 */
 	border-radius: 8px;
 }
+
