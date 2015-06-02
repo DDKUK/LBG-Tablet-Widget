@@ -8,6 +8,15 @@
          jsKeyboard.currentElement = $firstInput;
          jsKeyboard.currentElementCursorPosition = 0;
 		 
+		 $('#container').on("mousemove", function (e) {
+			$('#cursor').offset({ 
+			left: (e.pageX - cursorOffset.left)
+			, top : (e.pageY - cursorOffset.top)
+			})
+
+		 });
+		 
+		 
 		 /*
 				 
 		 $('.pixelText').on("mousedown touchend", function(){

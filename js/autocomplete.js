@@ -135,6 +135,8 @@ $.widget( "custom.combobox", {
 	 	 
  
 	 $(document).ready(function() {
+		 
+
 		 $("#toggle" ).click(function() {
              $( "#combobox" ).toggle();
          });

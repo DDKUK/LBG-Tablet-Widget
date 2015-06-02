@@ -11,6 +11,7 @@ select {
 font-weight: bold;
 display: block;
 width: 50%;
+
 }
 
 button {
@@ -47,14 +48,21 @@ html,
 body {
     width: 100%;
     height: 100%;
+	
+
 }
 html {
     display: table;
+
 }
 body {
     display: table-cell;
     vertical-align: middle;
+
+	
 }
+
+
 
 
 .inputwide{
@@ -94,7 +102,7 @@ body {
 .ui-widget{
     text-align:center;	
 	
-	
+
 }
 
 .noTitleStuff .ui-dialog-titlebar {
