@@ -168,8 +168,8 @@ $.widget( "custom.combobox", {
 				jsKeyboard.currentElementCursorPosition = $("#olay_selectbox_brand").getCursorPosition();	
 
 
-				$('.pixelText').attr('style', 'border:none');				
-				$('#combo-2').find('.pixelText').attr('style', 'border: 1px solid red');
+				//$('.pixelText').attr('style', 'border:none');				
+				//$('#combo-2').find('.pixelText').attr('style', 'border: 1px solid red');
 			 }	 
 		 });
 		 
@@ -209,8 +209,8 @@ $.widget( "custom.combobox", {
 				jsKeyboard.currentElement = $("#olay_combobox");
 				jsKeyboard.currentElementCursorPosition = $("#olay_combobox").getCursorPosition();
 				
-				$('.pixelText').attr('style', 'border:none');				
-				$('#combo-3').find('.pixelText').attr('style', 'border: 1px solid red');
+				//$('.pixelText').attr('style', 'border:none');				
+				//$('#combo-3').find('.pixelText').attr('style', 'border: 1px solid red');
 			 }
 
 		 });
@@ -228,8 +228,8 @@ $.widget( "custom.combobox", {
 				 jsKeyboard.currentElement = $("#olay_selectbox_position");
 				 jsKeyboard.currentElementCursorPosition = $("#olay_selectbox_position").getCursorPosition();
 				 
-				 $('.pixelText').attr('style', 'border:none');				
-				 $('#combo-4').find('.pixelText').attr('style', 'border: 1px solid red');
+				 //$('.pixelText').attr('style', 'border:none');				
+				 //$('#combo-4').find('.pixelText').attr('style', 'border: 1px solid red');
 			}
 		 
 		 });
@@ -254,8 +254,8 @@ $.widget( "custom.combobox", {
 				
 				update_FormFactor();
 				
-				$('.pixelText').attr('style', 'border:none');				
-				$('#combo-5').find('.pixelText').attr('style', 'border: 1px solid red');		
+				//$('.pixelText').attr('style', 'border:none');				
+				//$('#combo-5').find('.pixelText').attr('style', 'border: 1px solid red');		
 				
 			}
 		 
@@ -274,7 +274,7 @@ $.widget( "custom.combobox", {
 				 jsKeyboard.currentElement = $("#selectbox_player");
 				 jsKeyboard.currentElementCursorPosition = 0;
 				 
-				 $('.pixelText').attr('style', 'border:none');	
+				 //$('.pixelText').attr('style', 'border:none');	
 			 }
 
 		 });

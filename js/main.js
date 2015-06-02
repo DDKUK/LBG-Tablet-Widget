@@ -8,6 +8,8 @@
          jsKeyboard.currentElement = $firstInput;
          jsKeyboard.currentElementCursorPosition = 0;
 		 
+		 /*
+				 
 		 $('.pixelText').on("mousedown touchend", function(){
 			 $('.pixelText').attr('style', 'border:none');
 			$(this).attr('style', 'border: 1px solid red');
@@ -33,5 +35,9 @@
 			 
 			
 		 });
+		 
+		 */
+		 
+		 
 		
      });

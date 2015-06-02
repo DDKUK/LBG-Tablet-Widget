@@ -81,7 +81,7 @@
 		try{				
 				jQuery.ajax({
 				type: "POST",
-				url: 'http://localhost:9977',
+				url: 'http://54.194.57.104:9977',
 				data: strdata,
 				
 				dataType: "text",

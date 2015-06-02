@@ -44,7 +44,7 @@ overflow:hidden;
 	margin-top:-8px;
 }
 
-.pixelText:focus{
+.DISABLEDpixelText:focus{
 	outline:none !important;
     border-color:red !important;
     box-shadow:0 0 10px blue !important;
