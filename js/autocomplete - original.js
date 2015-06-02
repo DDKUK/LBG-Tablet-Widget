@@ -79,67 +79,17 @@ $.widget( "custom.combobox", {
       },
  
       _source: function( request, response ) {
-    var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-    var select_el = this.element.get(0); // get dom element
-    var rep = new Array(); // response array
-    var maxRepSize = 20; // maximum response size
-    // simple loop for the options
-    for (var i = 0; i < select_el.length; i++) {
-        var text = select_el.options[i].text;
-        if ( select_el.options[i].value && ( !request.term || matcher.test(text) ) )
-            // add element to result array
-            rep.push({
-                label: text.replace(
-                        new RegExp(
-                                "(?![^&;]+;)(?!<[^<>]*)(" +
-                                $.ui.autocomplete.escapeRegex(request.term) +
-                                ")(?![^<>]*>)(?![^&;]+;)", "gi"
-                            ), "$1" ),
-                value: text,
-                option: select_el.options[i]
-            });
-								
-			if ( rep.length > maxRepSize && select_el.id === "combobox" ) {
-
-				//limit results to 20
-				//console.log(select_el.id);
-				//var lableitem = rep.push({
-				//    label: "... Use Keyboard To Find More Results",
-				//    value: "none",
-				//    option: "0"
-				//});
-				//rep[51].attr("disabled",true);
-				//console.log(rep[51]);
-				//console.log(lableitem);
-			
-            break;
-			}
-		
-     }
-     // send response
-     response( rep );
-},
-
-_select: function( event, ui ) {
-    if ( ui.item.value == "none") {
-		
-        return false;		
-    } else {
-        ui.item.option.selected = true;
-        self._trigger( "selected", event, {
-            item: ui.item.option
-        });
-	
-    }
-},
-_focus: function( event, ui ) {
-    if ( ui.item.value == "none") {
-
-        return false;
-    }
-},
-
-
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response( this.element.children( "option" ).map(function() {
+          var text = $( this ).text();
+          if ( this.value && ( !request.term || matcher.test(text) ) )
+            return {
+              label: text,
+              value: text,
+              option: this
+            };
+        }) );
+      },
  
       _removeIfInvalid: function( event, ui ) {
  
@@ -163,9 +113,6 @@ _focus: function( event, ui ) {
         if ( valid ) {
           return;
         }
- 
-		
- 
  
         // Remove invalid value
         this.input
