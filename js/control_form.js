@@ -4,8 +4,9 @@
 			dialogClass: 'noTitleStuff' 
 	}); // Initialize dialog plugin
 
-	$("#submit_button").addClass("ui-input-box2 ui-corner-right ui-corner-left ui-button-icon custom-combobox ui-widget ui-state-default");	 
+	//$("#submit_button").addClass("ui-input-box2 ui-corner-right ui-corner-left ui-button-icon custom-combobox ui-widget ui-state-default");	 
 	
+	//$("#submit_button").addClass("pixelsubmitbutton");
 	
 	function closeDialog(){
 		$('.showresult').dialog("close");

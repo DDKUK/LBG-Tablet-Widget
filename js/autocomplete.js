@@ -23,14 +23,14 @@ $.widget( "custom.combobox", {
           .attr( "title", "" )
           .attr( "type", "text" )
 		  .attr("id", "olay_" + this.element.attr("id") )	
-          .addClass( "ui-input-box  ui-widget ui-widget-content ui-state-default ui-corner-left pixelText"  )
+          .addClass( "ui-corner-left pixelinputbox"  )
           .autocomplete({
             delay: 0,
             minLength: 0,
             source: $.proxy( this, "_source" )
           })
           .tooltip({
-            tooltipClass: "ui-state-highlight"
+            tooltipClass: ""
           });
  
         this._on( this.input, {
@@ -56,12 +56,12 @@ $.widget( "custom.combobox", {
           .appendTo( this.wrapper )
           .button({
             icons: {
-              primary: "ui-icon-triangle-1-s"
+              primary: ""
             },
             text: false
           })
           .removeClass( "ui-corner-all" )
-          .addClass( "ui-corner-right ui-input-button pixelButton" )
+          .addClass( "pixelinputbutton" )
           .mousedown(function() {
             wasOpen = input.autocomplete( "widget" ).is( ":visible" );
           })

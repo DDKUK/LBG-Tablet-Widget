@@ -201,9 +201,17 @@
 }
 .ui-autocomplete {
 	position: absolute;
-	top: 0;
-	left: 0;
+	top: 0 ;
+	left: 0 ;
 	cursor: default;
+	width: 556px !important;	
+	
+	color: #999999 !important;
+	font-weight: regular !important;
+	font-size:15 !important;
+	font-family: "Arial", Arial !important;
+	text-align: center;
+	
 }
 .ui-button {
 	display: inline-block;
@@ -886,6 +894,8 @@ body .ui-tooltip {
 	background: #e6e6e6 url("images/ui-bg_glass_75_e6e6e6_1x400.png") 50% 50% repeat-x;
 	
 }
+
+
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
@@ -994,13 +1004,13 @@ body .ui-tooltip {
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url("images/ui-icons_222222_256x240.png");
+	
 }
 .ui-widget-header .ui-icon {
-	background-image: url("images/ui-icons_222222_256x240.png");
+	
 }
 .ui-state-default .ui-icon {
-	background-image: url("images/ui-icons_888888_256x240.png");
+	
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
